@@ -114,10 +114,10 @@ public class IntArrayWorker
      return count;
   }
 
-  public int getLargest(int [][] c)
+  public int getLargest()
   {
-      int largest = c[0][[0]; 
-      for (int [] i : c)
+      int largest = matrix[0][0]; 
+      for (int [] i : matrix)
       {
           for (int j : i)
           {
@@ -126,5 +126,17 @@ public class IntArrayWorker
           }        
       } 
       return largest;
+  }
+  
+  public int getColTotal(int c) 
+  {
+      int sum = 0;
+      for (int [] i : matrix) 
+      {
+       
+          sum +=i[c]; 
+          
+      }
+      return sum; 
   }
 }
