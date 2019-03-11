@@ -152,13 +152,31 @@ public class Picture extends SimplePicture
           {   int red = p.getRed();
               int green = p.getGreen();
               int blue = p.getBlue();
-              p.setRed(red-255);
-              p.setGreen(green-255);
-              p.setBlue(blue-255);
+              p.setRed(255-red);
+              p.setGreen(255-green);
+              p.setBlue(255-blue);
             }
         }
     }
       
+  public void grayscale()
+  {   
+      Pixel [][] pixels = this.getPixels2D();
+      for (Pixel [] a : pixels)
+      {
+          for (Pixel p : a)
+          {
+             int red = p.getRed();
+             int green = p.getGreen();
+             int blue = p.getBlue();
+             int average = (red+green+blue)/3;
+             p.setRed(average);
+             p.setBlue(average);
+             p.setGreen(average);
+            }
+        }
+    }
+    
   /** Method that mirrors the picture around a 
     * vertical mirror in the center of the picture
     * from left to right */
@@ -179,6 +197,40 @@ public class Picture extends SimplePicture
     } 
   }
   
+  public void mirrorVerticalRightToLeft()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+    int width = pixels[0].length;
+    for (int row = 0; row < pixels.length; row++)
+    {
+      for (int col = 0; col < width / 2; col++)
+      {
+        leftPixel = pixels[row][col];
+        rightPixel = pixels[row][width - 1 - col];
+        leftPixel.setColor(rightPixel.getColor());
+      }
+    } 
+  }
+  
+  public void mirrorHorizontal()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel topPixel = null;
+    Pixel bottomPixel = null;
+    int width = pixels[0].length;
+    int height = pixels.length;
+    for (int row = 0; row < height/2; row++)
+    {
+      for (int col = 0; col < width; col++)
+      {
+        topPixel = pixels[row][height - 1 - col];
+        bottomPixel = pixels[row][width - 1 - col];
+        topPixel.setColor(bottomPixel.getColor());
+      }
+    }
+     }   
   /** Mirror just part of a picture of a temple */
   public void mirrorTemple()
   {
@@ -277,7 +329,6 @@ public class Picture extends SimplePicture
       }
     }
   }
-  
   
   /* Main method for testing - each class in Java can have a main 
    * method 
