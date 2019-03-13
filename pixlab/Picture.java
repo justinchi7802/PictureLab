@@ -293,6 +293,73 @@ public class Picture extends SimplePicture
     }
   }
   
+  public void mirrorArms()
+  {
+      int mirrorPoint = 190;
+      Pixel leftPixel = null;
+      Pixel rightPixel = null;
+      int count = 0;
+      Pixel [][] pixels = this.getPixels2D();
+      
+    for (int row = 158; row < 191; row++)
+    {
+      // loop from 13 to just before the mirror point
+      for (int col = 105; col < 170; col++)
+      {
+        leftPixel = pixels[row][col];      
+        rightPixel = pixels[mirrorPoint - row + mirrorPoint][col];
+        rightPixel.setColor(leftPixel.getColor());
+      }
+    }
+    
+    for (int row = 171; row < 196; row++)
+    {
+      // loop from 13 to just before the mirror point
+      for (int col = 239; col < 294; col++)
+      {
+        leftPixel = pixels[row][col];      
+        rightPixel = pixels[mirrorPoint - row + mirrorPoint][col];
+        rightPixel.setColor(leftPixel.getColor());
+      }
+    }
+    }
+    
+  public void mirrorGull()
+  {
+    int mirrorPoint = 343;
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+    int count = 0;
+    Pixel[][] pixels = this.getPixels2D();
+    
+    // loop through the rows
+    for (int row = 234; row < 267; row++)
+    {
+      // loop from 13 to just before the mirror point
+      for (int col = 237; col < mirrorPoint; col++)
+      {
+        
+        leftPixel = pixels[row][col];      
+        rightPixel = pixels[row]                       
+                         [mirrorPoint - col + mirrorPoint];
+        rightPixel.setColor(leftPixel.getColor());
+      }
+    }
+    
+    for (int row = 267; row < 318; row++)
+    {
+      // loop from 13 to just before the mirror point
+      for (int col = 248; col < mirrorPoint; col++)
+      {
+        
+        leftPixel = pixels[row][col];      
+        rightPixel = pixels[row]                       
+                         [mirrorPoint - col + mirrorPoint];
+        rightPixel.setColor(leftPixel.getColor());
+      }
+    }
+  }
+  
   /** copy from the passed fromPic to the
     * specified startRow and startCol in the
     * current picture
@@ -322,7 +389,7 @@ public class Picture extends SimplePicture
         toPixel.setColor(fromPixel.getColor());
       }
     }   
-  }
+    }
 
   /** Method to create a collage of several pictures */
   public void createCollage()
